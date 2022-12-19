@@ -2,8 +2,8 @@ package main
 
 import (
 	"net/http"
-	"fmt"
-	"github.com/Heinirich/golang_api_test/struct"
+	"encoding/json"
+	"github.com/Heinirich/golang_api_test/structs"
 )
 
 
@@ -14,11 +14,11 @@ func main()  {
 	mux.HandleFunc("/ping",func (w http.ResponseWriter, r *http.Request)  {
 		if r.Method == http.MethodGet {
 			data := structs.Response{
-				Code : http.StatusOk,
-				Body : "pong"
+				Code : http.StatusOK,
+				Body : "pong",
 			}
-			json.NewEncoder(w).Encode()
+			json.NewEncoder(w).Encode(data)
 		}
 	})
-	http.ListenAndServe(":8000",nil)
+	http.ListenAndServe(":8000",mux)
 }
