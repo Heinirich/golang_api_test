@@ -15,5 +15,6 @@ func Connect() *sql.DB {
 		log.Fatal(err)
 	}
 	fmt.Println("Connected to database")
+	fmt.Println("Serving")
 	return db
 }
