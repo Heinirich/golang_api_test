@@ -8,6 +8,8 @@ import (
 
 )
 
+var con *sql.DB
+
 func Connect() *sql.DB {
 	db,err := sql.Open("mysql","root:Darkweb360!!@/golang_api_test")
 
@@ -15,6 +17,6 @@ func Connect() *sql.DB {
 		log.Fatal(err)
 	}
 	fmt.Println("Connected to database")
-	fmt.Println("Serving")
+	con = db
 	return db
 }
