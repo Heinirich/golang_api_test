@@ -66,7 +66,9 @@ func create() http.HandlerFunc{
 			w.WriteHeader(http.StatusOK)
 			json.NewEncoder(w).Encode(data)
 		}else if r.Method == http.MethodDelete{
-			name := r.URL.Query().Get("name")
+			// name := r.URL.Query().Get("name")
+			name := r.URL.Path[1:]
+			//var name string
 			if err := model.DeleteTodo(name);err!=nil{
                 w.Write([]byte(err.Error()))
             }
