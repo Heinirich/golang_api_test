@@ -11,7 +11,7 @@ import (
 var con *sql.DB
 
 func Connect() *sql.DB {
-	db,err := sql.Open("mysql","root:Darkweb360!!@/golang_api_test")
+	db,err := sql.Open("mysql","root_two:Darkweb360!!@/golang_api_test")
 
 	if err != nil{
 		log.Fatal(err)
