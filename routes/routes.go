@@ -13,6 +13,7 @@ func Register() *http.ServeMux{
 	mux := http.NewServeMux()
 	mux.HandleFunc("/ping",ping())
 	mux.HandleFunc("/",create())
+	mux.HandleFunc("/readone",ReadOne())
 	return mux
 }
 
@@ -22,6 +23,20 @@ func ping() http.HandlerFunc{
 			data := views.Response{
 				Code : http.StatusOK,
 				Body : "pong",
+			}
+			w.WriteHeader(http.StatusOK)
+			json.NewEncoder(w).Encode(data)
+		}
+	}
+}
+
+func ReadOne() http.HandlerFunc{
+	return func(w http.ResponseWriter, r *http.Request)  {
+		if r.Method == http.MethodGet {
+			name := r.URL.Query().Get("name")
+			data ,err := model.ReadByName(name)
+			if err!= nil{
+                w.Write([]byte(err.Error()))
 			}
 			w.WriteHeader(http.StatusOK)
 			json.NewEncoder(w).Encode(data)
